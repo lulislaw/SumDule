@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "557852102464",
+    "firebase_url": "https://dule-3fb37-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "dule-3fb37",
+    "storage_bucket": "dule-3fb37.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557852102464:android:54e01008f6222af22634a5",
+        "android_client_info": {
+          "package_name": "com.lul.dule"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "557852102464-hcb01jfa67pd6ptcm0tap2jhe7mnojp2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpOHJYmIwLzBFQUlFXMpY5AIo-fkT-5Rw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "557852102464-hcb01jfa67pd6ptcm0tap2jhe7mnojp2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557852102464:android:782226ce99ec4ffb2634a5",
+        "android_client_info": {
+          "package_name": "com.lul.dulesum"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "557852102464-hcb01jfa67pd6ptcm0tap2jhe7mnojp2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpOHJYmIwLzBFQUlFXMpY5AIo-fkT-5Rw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "557852102464-hcb01jfa67pd6ptcm0tap2jhe7mnojp2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

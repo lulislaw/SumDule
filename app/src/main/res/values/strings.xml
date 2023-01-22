@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Dule</string>
+    <string name="home">Главная</string>
+    <string name="settings">Настройки</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="back">Назад</string>
+    <string name="save">Сохранить</string>
+    <string name="load">Загрузка</string>
+    <string name="group">Группа</string>
+    <string name="institute">Институт</string>
+    <string name="course">Курс</string>
+    <string name="selectgroup">Выберите вашу группу</string>
+
+    <string-array name="daysOfWeek">
+        <item>Понедельник</item>
+        <item>Вторник</item>
+        <item>Среда</item>
+        <item>Четверг</item>
+        <item>Пятница</item>
+        <item>Суббота</item>
+        <item>Воскресенье</item>
+    </string-array>
+    <string-array name="dermovoeTime">
+        <item>8.15</item>
+        <item>9.55</item>
+        <item>11.35</item>
+        <item>13.15</item>
+        <item>13.45</item>
+        <item>15.25</item>
+        <item>17.05</item>
+        <item>18.50</item>
+        <item>20.30</item>
+
+
+
+    </string-array>
+</resources>
