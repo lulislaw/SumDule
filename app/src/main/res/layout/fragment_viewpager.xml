@@ -56,7 +56,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/backgroundroundblue"
-                            android:elevation="1dp"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="2dp"
                             android:text="Практика" />
@@ -74,7 +73,6 @@
                             android:layout_height="wrap_content"
 
                             android:background="@drawable/backgroundroundwhite"
-                            android:elevation="1dp"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="2dp"
                             android:text="Через 2ч 15м"
@@ -147,7 +145,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/backgroundroundblue"
-                            android:elevation="1dp"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="2dp"
                             android:text="Практика" />
@@ -165,7 +162,6 @@
                             android:layout_height="wrap_content"
 
                             android:background="@drawable/backgroundroundwhite"
-                            android:elevation="1dp"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="2dp"
                             android:text="Через 2ч 15м"
@@ -236,7 +232,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/backgroundroundblue"
-                            android:elevation="1dp"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="2dp"
                             android:text="Практика" />
@@ -254,7 +249,6 @@
                             android:layout_height="wrap_content"
 
                             android:background="@drawable/backgroundroundwhite"
-                            android:elevation="1dp"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="2dp"
                             android:text="Через 2ч 15м"
@@ -325,7 +319,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/backgroundroundblue"
-                            android:elevation="1dp"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="2dp"
                             android:text="Практика" />
@@ -343,7 +336,6 @@
                             android:layout_height="wrap_content"
 
                             android:background="@drawable/backgroundroundwhite"
-                            android:elevation="1dp"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="2dp"
                             android:text="Через 2ч 15м"

@@ -1,5 +1,7 @@
 package com.lul.dulesum
 
+import kotlinx.datetime.LocalDate
+
 class ItemOneDay(
     var FirstSubject: ItemSubject? = ItemSubject(),
     var SecondSubject: ItemSubject? = ItemSubject(),

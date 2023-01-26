@@ -20,12 +20,22 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.lul.dulesum.databinding.FragmentHomeBinding
 import io.paperdb.Paper
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 import java.util.*
 
 
 private lateinit var binding: FragmentHomeBinding
 private lateinit var database: DatabaseReference
 private var dpd: DatePickerDialog? = null
+val startDate = LocalDate(2022, 8, 29)
+val endDate = LocalDate(2023, 1, 1)
+val currentMoment = Clock.System.now()
+val currentEpochDay =
+    currentMoment.toLocalDateTime(TimeZone.currentSystemDefault()).date.toEpochDays()
 
 
 class HomeFragment : Fragment(), View.OnClickListener {
@@ -38,14 +48,22 @@ class HomeFragment : Fragment(), View.OnClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View? {
+
+
+        var countWeeks = ((endDate.toEpochDays() - startDate.toEpochDays()) / 7) + 1
+
+
 
         dpd = DatePickerDialog(
             requireContext(),
             R.style.accent,
             DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
             },
-            202, 0, 22
+            currentMoment.toLocalDateTime(kotlinx.datetime.TimeZone.currentSystemDefault()).year,
+            currentMoment.toLocalDateTime(kotlinx.datetime.TimeZone.currentSystemDefault()).month.ordinal,
+            currentMoment.toLocalDateTime(kotlinx.datetime.TimeZone.currentSystemDefault()).dayOfMonth
 
         )
 
@@ -53,7 +71,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         database = Firebase.database.reference
 
-        var countWeeks = 12
+
 
         binding.calendarButton.setOnClickListener(this)
 
@@ -121,27 +139,21 @@ class HomeFragment : Fragment(), View.OnClickListener {
         }
 
 
-
         val adapter = AdapterViewPager(
             finalListDays,
             requireContext()
         )
         binding.ViewPager2.adapter = adapter
 
-
+        //  binding.calendarButton.text = "${LocalDate.fromEpochDays(startDate.toEpochDays() + curItem).dayOfMonth}.${LocalDate.fromEpochDays(startDate.toEpochDays() + curItem).monthNumber}.${LocalDate.fromEpochDays(startDate.toEpochDays() + curItem).year}"
         binding.ViewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             @SuppressLint("SetTextI18n")
             override fun onPageSelected(position: Int) {
 
 
-///86400000
-
-
-
-
-
-
-
+                var date = LocalDate.fromEpochDays(startDate.toEpochDays() + position)
+                setDot(position%7)
+                binding.calendarButton.text = "${date.dayOfMonth}.${date.monthNumber}.${date.year}"
 
 
                 if ((position / 7) % 2 == 0)
@@ -160,6 +172,9 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
             @SuppressLint("SetTextI18n")
             override fun onDateChanged(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
+                var date = LocalDate(p1, p2+1, p3).toEpochDays()
+                binding.ViewPager2.currentItem = (date - startDate.toEpochDays())
+
 
 
                 dpd?.dismiss()
@@ -169,8 +184,12 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
 
 
-
+        if (Paper.book("main").read<Int>("launch") == 0) {
+            binding.ViewPager2.currentItem = (currentEpochDay - startDate.toEpochDays())
+            Paper.book("main").write("launch", 1)
+        }
         return binding.root
+
     }
 
 
@@ -186,7 +205,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 dpd?.getButton(DatePickerDialog.BUTTON_POSITIVE)
                     ?.setOnClickListener(object : OnClickListener {
                         override fun onClick(p0: View?) {
-
+                            binding.ViewPager2.currentItem = (currentEpochDay - startDate.toEpochDays())
                             dpd?.dismiss()
                         }
 

@@ -11,6 +11,8 @@
     <string name="institute">Институт</string>
     <string name="course">Курс</string>
     <string name="selectgroup">Выберите вашу группу</string>
+    <string name="finish">Закончилось</string>
+    <string name="search">Поиск</string>
 
     <string-array name="daysOfWeek">
         <item>Понедельник</item>
@@ -31,7 +33,6 @@
         <item>17.05</item>
         <item>18.50</item>
         <item>20.30</item>
-
 
 
     </string-array>

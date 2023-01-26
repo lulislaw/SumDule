@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var homeFragment: HomeFragment
     private lateinit var settingsFragment: SettingsFragment
+    private lateinit var searchFragment: SearchFragment
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +21,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         homeFragment = HomeFragment.newInstance()
         settingsFragment = SettingsFragment.newInstance()
+        searchFragment = SearchFragment.newInstance()
         Paper.init(this)
+        Paper.book("main").write("launch", 0)
         setfragment(homeFragment)
         binding.bottomNavView.setOnNavigationItemSelectedListener {
             when(it.itemId)
@@ -30,6 +33,9 @@ class MainActivity : AppCompatActivity() {
                       }
                 R.id.menu_settings ->{
                     setfragment(settingsFragment)
+                }
+                R.id.menu_search ->{
+                    setfragment(searchFragment)
                 }
             }
             true

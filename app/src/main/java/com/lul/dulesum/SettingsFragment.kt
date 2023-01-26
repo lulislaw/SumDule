@@ -132,8 +132,7 @@ class SettingsFragment : Fragment(),View.OnClickListener {
                                         "Время" -> subject.SubjectTime = part.value.toString()
                                         "Неделя" -> subject.SubjectWeek = part.value.toString()
                                         "Предмет" -> subject.SubjectTitle = part.value.toString()
-                                        "Преподаватель" -> subject.SubjectTeacher =
-                                            part.value.toString()
+                                        "Преподаватель" -> subject.SubjectTeacher = part.value.toString()
                                         "Тип" -> subject.SubjectType = part.value.toString()
                                     }
                                     subject.SubjectCourse =

@@ -13,4 +13,5 @@
     <color name="blue2">#0471F5</color>
     <color name="whitegrey">#F3F3F4</color>
     <color name="bluelight">#83AAFF</color>
+    <color name="redlight">#FF8383</color>
 </resources>
