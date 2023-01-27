@@ -52,7 +52,10 @@ class AdapterItemSubject(private val dataSet: ArrayList<ItemSubject>) :
         return MyViewHolder(view)
     }
 
-
+        fun getPosition(position: Int):Int
+        {
+            return position
+        }
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = dataSet[position]
         holder.course.text = currentItem.SubjectCourse
@@ -64,7 +67,6 @@ class AdapterItemSubject(private val dataSet: ArrayList<ItemSubject>) :
         holder.time.text = currentItem.SubjectTime
         holder.teacher.text = currentItem.SubjectTeacher
         holder.title.text = currentItem.SubjectTitle
-        println("fdsfasdfasdgasdgdasfgdsfg")
 
     }
 }

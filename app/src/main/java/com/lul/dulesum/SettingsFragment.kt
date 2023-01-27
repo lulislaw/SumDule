@@ -144,6 +144,7 @@ class SettingsFragment : Fragment(),View.OnClickListener {
                                 }
                                 listSubjects.add(subject)
                                 if (listSubjects.size > 46) {
+
                                     binding.sgButtonSave.isEnabled = true
                                     binding.sgProgressBar.visibility = View.INVISIBLE
                                 }

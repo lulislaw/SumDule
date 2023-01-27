@@ -10,7 +10,4 @@ data class ItemSubject(
     var SubjectGroup: String? = "nu",
     var SubjectInstitute: String? = "nu",
     var SubjectCourse: String? = "nu"
-
-
-
 )

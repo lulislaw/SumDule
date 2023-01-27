@@ -11,6 +11,16 @@
         android:orderInCategory="2"
         android:title="@string/search" />
     <item
+        android:id="@+id/menu_news"
+        android:icon="@drawable/newspaper"
+        android:orderInCategory="3"
+        android:title="@string/news" />
+    <item
+        android:id="@+id/menu_notes"
+        android:icon="@drawable/bookmarks"
+        android:orderInCategory="4"
+        android:title="@string/notes" />
+    <item
         android:id="@+id/menu_settings"
         android:icon="@drawable/settings"
         android:orderInCategory="5"
