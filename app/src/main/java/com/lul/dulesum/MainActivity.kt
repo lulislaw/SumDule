@@ -81,11 +81,5 @@ class MainActivity : AppCompatActivity() {
                 .show(fragments.get(fragmentId))
                 .commit();
         }
-
-
-
-
-
-
     }
 }

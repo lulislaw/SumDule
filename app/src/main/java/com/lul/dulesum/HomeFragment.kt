@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.DatePicker
 import android.widget.DatePicker.OnDateChangedListener
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
@@ -124,15 +125,19 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
         var abbrSource = listAllItems?.get(0)?.SubjectGroup?.split(" ")
         var abbr = ""
-        for (word in abbrSource!!) {
-            abbr = abbr + word.get(0)
+        if (abbrSource.isNullOrEmpty()) {
+            println("abbrSource is empty")
+        } else {
+            for (word in abbrSource!!) {
+                abbr = abbr + word.get(0)
 
+            }
+            abbr = abbr.substring(0, abbr.length - 1)
+                .uppercase(Locale.getDefault()) + " " + listAllItems?.get(0)?.SubjectCourse?.get(7) + "-" + abbr.get(
+                abbr.length - 1
+            )
+            binding.groupTv.text = abbr
         }
-        abbr = abbr.substring(0, abbr.length - 1)
-            .uppercase(Locale.getDefault()) + " " + listAllItems?.get(0)?.SubjectCourse?.get(7) + "-" + abbr.get(
-            abbr.length - 1
-        )
-        binding.groupTv.text = abbr
         for (i in 0 until countWeeks) {
             finalListDays.addAll(evenListDays)
             finalListDays.addAll(notEvenListDays)
@@ -143,6 +148,9 @@ class HomeFragment : Fragment(), View.OnClickListener {
             finalListDays,
             requireContext()
         )
+        adapter.onItemClick = {
+            Toast.makeText(requireActivity(), "${it?.SubjectTitle?.trim()}", Toast.LENGTH_SHORT).show()
+        }
         binding.ViewPager2.adapter = adapter
 
         //  binding.calendarButton.text = "${LocalDate.fromEpochDays(startDate.toEpochDays() + curItem).dayOfMonth}.${LocalDate.fromEpochDays(startDate.toEpochDays() + curItem).monthNumber}.${LocalDate.fromEpochDays(startDate.toEpochDays() + curItem).year}"

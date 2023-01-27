@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -14,13 +15,13 @@ import kotlinx.datetime.TimeZone
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.*
+import javax.security.auth.Subject
 
 
 class AdapterViewPager(
     val list: ArrayList<ItemOneDay>,
     val context: Context
-
-) : RecyclerView.Adapter<AdapterViewPager.ViewPagerViewHolder>() {
+) : RecyclerView.Adapter<AdapterViewPager.ViewPagerViewHolder>(), OnClickListener {
     inner class ViewPagerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewPagerViewHolder {
@@ -31,9 +32,12 @@ class AdapterViewPager(
 
     val startDate = kotlinx.datetime.LocalDateTime(2022, 8, 29, 0, 0, 0)
     val startDateEpoch = kotlinx.datetime.LocalDate(2022, 8, 29).toEpochDays()
+
+    var onItemClick : ((ItemSubject?) -> Unit)? = null
     override fun onBindViewHolder(holder: ViewPagerViewHolder, position: Int) {
         val dermoTime = context.resources.getStringArray(R.array.dermovoeTime)
         val curDay = list[position]
+
         holder.itemView.findViewById<TextView>(R.id.dayOfWeekTv).text =
             context.resources.getStringArray(R.array.daysOfWeek).get(position % 7)
         val Titles = arrayListOf<TextView>(
@@ -95,6 +99,10 @@ class AdapterViewPager(
 
 
         for (i in 0..3) {
+
+            Blocks[i].setOnClickListener {
+                onItemClick?.invoke(Subjects[i])
+            }
 
             Blocks.get(i).visibility = View.VISIBLE
             Titles.get(i).text = Subjects.get(i)?.SubjectTitle?.trim()
@@ -179,6 +187,9 @@ class AdapterViewPager(
     override fun getItemCount(): Int {
 
         return list.size
+    }
+
+    override fun onClick(v: View?) {
     }
 
 }
