@@ -2,35 +2,37 @@ package com.lul.dulesum
 
 import android.app.Dialog
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.Transformation
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.loopj.android.http.AsyncHttpClient
-import com.loopj.android.http.FileAsyncHttpResponseHandler
 import com.lul.dulesum.databinding.FragmentSearchBinding
-import cz.msebera.android.httpclient.Header
-import java.io.File
-import java.io.FileReader
 import java.nio.charset.Charset
 
 
 private lateinit var binding: FragmentSearchBinding
 private lateinit var adapterItemSubject: AdapterItemSubject
-lateinit var subjectList: ArrayList<ItemSubject>
+lateinit var subjectList: ArrayList<SearchFragment.itemSearch>
 private var newTopMargin = 40
 private var searchAtTop = false
 lateinit var dialog: Dialog
 lateinit var viewDialog: View
 var params: ViewGroup.MarginLayoutParams? = null
 lateinit var listDir: Array<String>
+var basicList = arrayListOf<SearchFragment.itemSearch>()
 
 class SearchFragment : Fragment(), OnClickListener {
 
@@ -47,53 +49,29 @@ class SearchFragment : Fragment(), OnClickListener {
         binding = FragmentSearchBinding.inflate(layoutInflater)
         binding.searchTv.setOnClickListener(this)
         dialog = Dialog(requireContext(), R.style.accent)
-        viewDialog = layoutInflater.inflate(R.layout.popup_filter,null)
+        viewDialog = layoutInflater.inflate(R.layout.popup_filter, null)
 
+        getAllObjectsWithParentKeys { array ->
+            params?.topMargin = newTopMargin
+            binding.searchTv.setLayoutParams(params)
+            binding.searchProgressBarPb.visibility = View.GONE
+            binding.searchEditText.isEnabled = true
+            basicList = array
+            adapterItemSubject = AdapterItemSubject(basicList)
+            binding.searchRecycler.adapter = adapterItemSubject
+            binding.searchRecycler.layoutManager =
+                StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL)
+
+
+
+        }
         dialog.setContentView(viewDialog)
 
 
 
 
         binding.searchEditText.isEnabled = false
-        val client = AsyncHttpClient()
-        listDir = arrayOf()
-        client.get(
-            "https://github.com/lulislaw/SUMTable_sourceXLSX/blob/main/search.txt?raw=true",
-            object :
-                FileAsyncHttpResponseHandler(requireContext()) {
 
-
-                override fun onSuccess(statusCode: Int, headers: Array<out Header>?, file: File?) {
-                    var tfr = FileReader(file)
-                    var text = "";
-                    val buffer = CharArray(8096)
-                    var chars: Int = tfr.read(buffer)
-                    while (chars != -1) {
-                        text = text + String(buffer, 0, chars)
-                        chars = tfr.read(buffer)
-                    }
-                    text = String(text.toByteArray(), Charset.forName("UTF-8"))
-                    listDir = text.split("Y").toTypedArray()
-
-
-                    params?.topMargin = newTopMargin
-                    binding.searchTv.setLayoutParams(params)
-                    search()
-                    binding.searchProgressBarPb.visibility = View.GONE
-                    binding.searchEditText.isEnabled = true
-                }
-
-
-                override fun onFailure(
-                    statusCode: Int,
-                    headers: Array<out Header>?,
-                    throwable: Throwable?,
-                    file: File?
-                ) {
-
-                }
-
-            })
 
         subjectList = arrayListOf()
 
@@ -101,23 +79,27 @@ class SearchFragment : Fragment(), OnClickListener {
 
         binding.searchEditText.setOnClickListener(this)
         binding.searchFilterButton.setOnClickListener(this)
+        binding.searchClearButton.setOnClickListener(this)
 
 
 
 
+        val handler = Handler(Looper.getMainLooper())
         binding.searchEditText.setHorizontallyScrolling(false)
         binding.searchEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-                search()
             }
 
             override fun afterTextChanged(p0: Editable?) {
-
+                handler.postDelayed({
+                    adapterItemSubject = AdapterItemSubject(searchItems(basicList, p0.toString().split(' ')) as ArrayList<itemSearch>)
+                    binding.searchRecycler.adapter = adapterItemSubject
+                    binding.searchRecycler.layoutManager =
+                        StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL)
+                }, 1000)
 
             }
 
@@ -130,7 +112,6 @@ class SearchFragment : Fragment(), OnClickListener {
     }
 
     companion object {
-
         @JvmStatic
         fun newInstance() =
             SearchFragment()
@@ -142,10 +123,12 @@ class SearchFragment : Fragment(), OnClickListener {
             R.id.searchFilterButton -> {
                 dialog.show()
             }
-            R.id.searchTv ->
-            {
+            R.id.searchTv -> {
 
 
+            }
+            R.id.searchClearButton ->{
+                binding.searchEditText.setText("")
             }
 
 
@@ -153,39 +136,66 @@ class SearchFragment : Fragment(), OnClickListener {
     }
 
 
-    fun search() {
 
+    data class itemSearch(
+        var instituteName: String = "",
+        var groupName: String = "",
+        var title: String = "",
+        var week: String = "",
+        var time: String = ""
+    )
 
-        var tempList: ArrayList<ItemSubject> = arrayListOf()
+    fun searchItems(
+        items: ArrayList<itemSearch>,
+        searchStrings: List<String>
+    ): List<itemSearch> {
+        return items.filter { item ->
+            searchStrings.all { searchString ->
+                item.instituteName.contains(searchString, ignoreCase = true) ||
+                        item.groupName.contains(searchString, ignoreCase = true) ||
+                        item.title.contains(searchString, ignoreCase = true) ||
+                        item.week.contains(searchString, ignoreCase = true) ||
+                        item.time.contains(searchString, ignoreCase = true)
+            }
+        }
+    }
 
-        for (it in listDir) {
+    fun getAllObjectsWithParentKeys(completion: (ArrayList<itemSearch>) -> Unit) {
+        val ref = Firebase.database.reference
+        val pairs = arrayListOf<itemSearch>()
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (institute in dataSnapshot.children) {
+                    for (group in institute.children) {
+                        for (lesson in group.children) {
+                            var item: itemSearch = itemSearch()
+                            for (value in lesson.children) {
 
-            if (it.split("s.").size > 1) {
-                if (it.toLowerCase()
-                        .contains(binding.searchEditText.text.toString().toLowerCase())
-                ) {
-                    var tempItem = ItemSubject()
-                    tempItem.SubjectCourse = "#curs"
-                    tempItem.SubjectGroup = "#grup"
-                    tempItem.SubjectInstitute = "#inst"
-                    tempItem.SubjectRoom = it.split("r.")[1].trim()
-                    tempItem.SubjectWeek = it.split("week.")[1].trim()
-                    tempItem.SubjectType = it.split("ty.")[1].trim()
-                    tempItem.SubjectTime = it.split("time.")[1].trim()
-                    tempItem.SubjectTeacher = it.split("te.")[1].trim()
-                    tempItem.SubjectTitle = it.split("s.")[1].trim()
-                    tempList.add(tempItem)
-
+                                item.instituteName = institute.key.toString().trim()
+                                item.groupName = group.key.toString().replace('\n',' ')
+                                when (value.key) {
+                                    "time" -> item.time = value.value.toString()
+                                    "week" -> item.week = value.value.toString()
+                                    "text" -> item.title = value.value.toString().replace("(","\n(")
+                                }
+                            }
+                            if (item.title != "None") {
+                                pairs.add(item)
+                            }
+                        }
+                    }
 
                 }
+                completion(pairs) // Вызываем колбэк и передаем заполненный список пар ключей-значений
             }
-        }
-        adapterItemSubject = AdapterItemSubject(tempList)
-        binding.searchRecycler.adapter = adapterItemSubject
-        binding.searchRecycler.layoutManager =
-            StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL)
 
-
+            override fun onCancelled(error: DatabaseError) {
+                // Обработка ошибки при чтении данных
+                completion(pairs) // Вызываем колбэк и передаем пустой список пар ключей-значений или сообщение об ошибке
+            }
+        })
     }
+
+
 }
 

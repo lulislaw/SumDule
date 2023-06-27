@@ -27,7 +27,7 @@
             android:layout_marginTop="160dp"
             android:fontFamily="@font/inter_bold"
             android:gravity="center"
-            android:text="DuleSUM"
+            android:text="SUMTuble"
             android:textColor="@color/blue2"
             android:textSize="34sp" />
 
@@ -58,7 +58,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTintMode="screen"
-                android:src="@drawable/filter" />
+                android:src="@drawable/filter"
+                android:visibility="gone" />
 
             <ImageButton
                 android:id="@+id/searchClearButton"

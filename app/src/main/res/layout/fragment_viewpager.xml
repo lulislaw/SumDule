@@ -51,7 +51,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/vpSubjectTypeOne"
+                            android:id="@+id/vpSubjectTimeOne"
                             style="@style/TextViewInter_regular16white"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -82,44 +82,17 @@
 
                     <TextView
                         android:id="@+id/vpSubjectTitleOne"
-                        style="@style/TextViewInter_bold20"
+                        style="@style/TextViewInter_regular20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/marginout"
                         android:layout_marginTop="@dimen/marginstandart"
+                        android:layout_marginEnd="@dimen/marginout"
+                        android:layout_marginBottom="@dimen/marginstandart"
                         android:layout_weight="1"
                         android:text="Предмет" />
 
-                    <TextView
-                        android:id="@+id/vpSubjectRoomOne"
-                        style="@style/TextViewInter_semibold20"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginout"
-                        android:layout_marginTop="@dimen/marginstandart"
-                        android:layout_weight="1"
-                        android:text="Аудитория" />
 
-
-                    <TextView
-                        android:id="@+id/vpSubjectTeacherOne"
-                        style="@style/TextViewInter_regular20"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginout"
-                        android:layout_marginTop="@dimen/marginstandart"
-                        android:text="Преподаватель" />
-
-
-                    <TextView
-                        android:id="@+id/vpSubjectTimeOne"
-                        style="@style/TextViewInter_regular20"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginout"
-                        android:layout_marginTop="@dimen/marginstandart"
-                        android:layout_marginBottom="@dimen/marginout"
-                        android:text="Время" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -140,7 +113,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/vpSubjectTypeTwo"
+                            android:id="@+id/vpSubjectTimeTwo"
                             style="@style/TextViewInter_regular16white"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -171,42 +144,16 @@
 
                     <TextView
                         android:id="@+id/vpSubjectTitleTwo"
-                        style="@style/TextViewInter_bold20"
+                        style="@style/TextViewInter_regular20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/marginout"
                         android:layout_marginTop="@dimen/marginstandart"
+                        android:layout_marginEnd="@dimen/marginout"
+                        android:layout_marginBottom="@dimen/marginstandart"
                         android:text="Предмет" />
 
-                    <TextView
-                        android:id="@+id/vpSubjectRoomTwo"
-                        style="@style/TextViewInter_semibold20"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginout"
-                        android:layout_marginTop="@dimen/marginstandart"
-                        android:text="Аудитория" />
 
-
-                    <TextView
-                        android:id="@+id/vpSubjectTeacherTwo"
-                        style="@style/TextViewInter_regular20"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginout"
-                        android:layout_marginTop="@dimen/marginstandart"
-                        android:text="Преподаватель" />
-
-
-                    <TextView
-                        android:id="@+id/vpSubjectTimeTwo"
-                        style="@style/TextViewInter_regular20"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginout"
-                        android:layout_marginTop="@dimen/marginstandart"
-                        android:layout_marginBottom="@dimen/marginout"
-                        android:text="Время" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -227,7 +174,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/vpSubjectTypeThree"
+                            android:id="@+id/vpSubjectTimeThree"
                             style="@style/TextViewInter_regular16white"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -258,42 +205,16 @@
 
                     <TextView
                         android:id="@+id/vpSubjectTitleThree"
-                        style="@style/TextViewInter_bold20"
+                        style="@style/TextViewInter_regular20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/marginout"
                         android:layout_marginTop="@dimen/marginstandart"
+                        android:layout_marginEnd="@dimen/marginout"
+                        android:layout_marginBottom="@dimen/marginstandart"
                         android:text="Предмет" />
 
-                    <TextView
-                        android:id="@+id/vpSubjectRoomThree"
-                        style="@style/TextViewInter_semibold20"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginout"
-                        android:layout_marginTop="@dimen/marginstandart"
-                        android:text="Аудитория" />
 
-
-                    <TextView
-                        android:id="@+id/vpSubjectTeacherThree"
-                        style="@style/TextViewInter_regular20"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginout"
-                        android:layout_marginTop="@dimen/marginstandart"
-                        android:text="Преподаватель" />
-
-
-                    <TextView
-                        android:id="@+id/vpSubjectTimeThree"
-                        style="@style/TextViewInter_regular20"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginout"
-                        android:layout_marginTop="@dimen/marginstandart"
-                        android:layout_marginBottom="@dimen/marginout"
-                        android:text="Время" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -314,7 +235,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/vpSubjectTypeFour"
+                            android:id="@+id/vpSubjectTimeFour"
                             style="@style/TextViewInter_regular16white"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -345,42 +266,16 @@
 
                     <TextView
                         android:id="@+id/vpSubjectTitleFour"
-                        style="@style/TextViewInter_bold20"
+                        style="@style/TextViewInter_regular20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/marginout"
                         android:layout_marginTop="@dimen/marginstandart"
+                        android:layout_marginEnd="@dimen/marginout"
+                        android:layout_marginBottom="@dimen/marginstandart"
                         android:text="Предмет" />
 
-                    <TextView
-                        android:id="@+id/vpSubjectRoomFour"
-                        style="@style/TextViewInter_semibold20"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginout"
-                        android:layout_marginTop="@dimen/marginstandart"
-                        android:text="Аудитория" />
 
-
-                    <TextView
-                        android:id="@+id/vpSubjectTeacherFour"
-                        style="@style/TextViewInter_regular20"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginout"
-                        android:layout_marginTop="@dimen/marginstandart"
-                        android:text="Преподаватель" />
-
-
-                    <TextView
-                        android:id="@+id/vpSubjectTimeFour"
-                        style="@style/TextViewInter_regular20"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginout"
-                        android:layout_marginTop="@dimen/marginstandart"
-                        android:layout_marginBottom="@dimen/marginout"
-                        android:text="Время" />
                 </LinearLayout>
 
                 <Space

@@ -33,7 +33,6 @@ class AdapterNews(private val dataSet: ArrayList<ItemNews>) :
 
     override fun onBindViewHolder(holder: MyViewHolderNews, position: Int) {
        var currentItem = dataSet[position]
-
         holder.title.text = currentItem.Title
         holder.date.text = currentItem.Date
         holder.image.setImageBitmap(currentItem.bitmapImage)

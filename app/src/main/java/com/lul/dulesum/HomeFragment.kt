@@ -11,7 +11,6 @@ import android.widget.Button
 import android.widget.DatePicker
 import android.widget.DatePicker.OnDateChangedListener
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
@@ -123,21 +122,14 @@ class HomeFragment : Fragment(), View.OnClickListener {
         evenListDays.add(ItemOneDay())
         notEvenListDays.add(ItemOneDay())
 
-        var abbrSource = listAllItems?.get(0)?.SubjectGroup?.split(" ")
+        var abbrSource = Paper.book("main").read<String>("group")?.split(' ')
         var abbr = ""
-        if (abbrSource.isNullOrEmpty()) {
-            println("abbrSource is empty")
-        } else {
-            for (word in abbrSource!!) {
-                abbr = abbr + word.get(0)
+        for (word in abbrSource!!) {
+            abbr = abbr + word.get(0)
+            println(abbr)
 
-            }
-            abbr = abbr.substring(0, abbr.length - 1)
-                .uppercase(Locale.getDefault()) + " " + listAllItems?.get(0)?.SubjectCourse?.get(7) + "-" + abbr.get(
-                abbr.length - 1
-            )
-            binding.groupTv.text = abbr
         }
+        binding.groupTv.text = abbr
         for (i in 0 until countWeeks) {
             finalListDays.addAll(evenListDays)
             finalListDays.addAll(notEvenListDays)
@@ -148,9 +140,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
             finalListDays,
             requireContext()
         )
-        adapter.onItemClick = {
-            Toast.makeText(requireActivity(), "${it?.SubjectTitle?.trim()}", Toast.LENGTH_SHORT).show()
-        }
         binding.ViewPager2.adapter = adapter
 
         //  binding.calendarButton.text = "${LocalDate.fromEpochDays(startDate.toEpochDays() + curItem).dayOfMonth}.${LocalDate.fromEpochDays(startDate.toEpochDays() + curItem).monthNumber}.${LocalDate.fromEpochDays(startDate.toEpochDays() + curItem).year}"
@@ -165,9 +154,9 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
 
                 if ((position / 7) % 2 == 0)
-                    binding.weekTv.text = "Нечетная"
+                    binding.weekTv.text = "Нечетная " + ((position / 7) + 1)
                 else
-                    binding.weekTv.text = "Четная"
+                    binding.weekTv.text = "Четная " + ((position / 7) + 1)
 
                 super.onPageSelected(position)
 
@@ -233,7 +222,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
             binding.dot5,
             binding.dot6,
             binding.dot7,
-
             )
 
         for (item in dotList) {

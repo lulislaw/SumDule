@@ -31,9 +31,15 @@ class MainActivity : AppCompatActivity() {
         fragments = arrayListOf(homeFragment,searchFragment,newsFragment,settingsFragment)
         boolFrag =  BooleanArray(fragments.size)
         Paper.init(this)
-        Paper.book("main").write("launch", 0)
+        if (Paper.book("main").read<ArrayList<ItemSubject>>("subjects") != null){
+            Paper.book("main").write("launch", 0)
+            setfragment(0)
+        }
+        else
+        {
+            setfragment(3)
+        }
 
-        setfragment(0)
         binding.bottomNavView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_home -> {
@@ -57,13 +63,11 @@ class MainActivity : AppCompatActivity() {
     fun setfragment(fragmentId: Int) {
         for(it in fragments)
         {
-
             supportFragmentManager.beginTransaction()
                 .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
                 .hide(it)
                 .commit();
         }
-
         if(boolFrag.get(fragmentId))
         {
             supportFragmentManager.beginTransaction()
