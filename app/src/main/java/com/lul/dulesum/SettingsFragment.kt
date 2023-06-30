@@ -19,6 +19,7 @@ import com.lul.dulesum.databinding.FragmentSettingsBinding
 import io.paperdb.Paper
 
 
+
 private lateinit var database: DatabaseReference
 private lateinit var binding: FragmentSettingsBinding
 private lateinit var listInstitute: ArrayList<String>

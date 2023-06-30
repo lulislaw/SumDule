@@ -15,7 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="@dimen/marginout"
-        android:layout_marginBottom="@dimen/marginout"
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:orientation="vertical">
@@ -27,9 +26,9 @@
             android:layout_marginTop="160dp"
             android:fontFamily="@font/inter_bold"
             android:gravity="center"
-            android:text="SUMTuble"
+            android:text=""
             android:textColor="@color/blue2"
-            android:textSize="34sp" />
+            android:textSize="12sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -59,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTintMode="screen"
                 android:src="@drawable/filter"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
             <ImageButton
                 android:id="@+id/searchClearButton"
@@ -81,7 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/marginout"
-            android:layout_marginBottom="50dp">
+            android:clipToPadding="false">
 
 
         </androidx.recyclerview.widget.RecyclerView>

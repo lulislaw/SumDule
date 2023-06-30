@@ -14,7 +14,7 @@
     <string name="finish">Закончилось</string>
     <string name="search">Поиск</string>
     <string name="news">Новости</string>
-    <string name="notes">Заметки</string>
+    <string name="cabinet">ЛК</string>
 
     <string-array name="daysOfWeek">
         <item>Понедельник</item>

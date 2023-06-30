@@ -20,7 +20,7 @@
         android:layout_height="match_parent"
         android:layout_marginHorizontal="@dimen/marginout"
         android:layout_marginTop="@dimen/marginout"
-        android:layout_marginBottom="60dp">
+        android:clipToPadding="false">
 
     </androidx.recyclerview.widget.RecyclerView>
 

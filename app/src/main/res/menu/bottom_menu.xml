@@ -16,10 +16,10 @@
         android:orderInCategory="3"
         android:title="@string/news" />
     <item
-        android:id="@+id/menu_notes"
-        android:icon="@drawable/bookmarks"
+        android:id="@+id/menu_cabinet"
+        android:icon="@drawable/guu"
         android:orderInCategory="4"
-        android:title="@string/notes" />
+        android:title="@string/cabinet" />
     <item
         android:id="@+id/menu_settings"
         android:icon="@drawable/settings"

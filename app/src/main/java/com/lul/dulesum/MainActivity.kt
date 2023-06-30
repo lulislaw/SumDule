@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var settingsFragment: SettingsFragment
     private lateinit var searchFragment: SearchFragment
     private lateinit var newsFragment: NewsFragment
+    private lateinit var cabinetFragment: CabinetFragment
 
     lateinit var fragments: ArrayList<Fragment>
     lateinit var boolFrag: BooleanArray
@@ -28,7 +29,8 @@ class MainActivity : AppCompatActivity() {
         settingsFragment = SettingsFragment.newInstance()
         searchFragment = SearchFragment.newInstance()
         newsFragment = NewsFragment.newInstance()
-        fragments = arrayListOf(homeFragment,searchFragment,newsFragment,settingsFragment)
+        cabinetFragment = CabinetFragment.newInstance()
+        fragments = arrayListOf(homeFragment,searchFragment,newsFragment,cabinetFragment,settingsFragment)
         boolFrag =  BooleanArray(fragments.size)
         Paper.init(this)
         if (Paper.book("main").read<ArrayList<ItemSubject>>("subjects") != null){
@@ -51,8 +53,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.menu_news -> {
                     setfragment(2)
                 }
-                R.id.menu_settings -> {
+                R.id.menu_cabinet -> {
                     setfragment(3)
+                }
+                R.id.menu_settings -> {
+                    setfragment(4)
                 }
 
             }
