@@ -24,6 +24,33 @@ class SearchFilterDialogFragment : BottomSheetDialogFragment() {
         val binding = FragmentSearchFilterDialogBinding.inflate(layoutInflater, container, false)
         this.binding = binding
 
+        setButtons(true)
+
+        binding.applyButton.setOnClickListener {
+            val type = binding.type.text.trim().toString()
+            val course = binding.course.text.trim().toString()
+            val time = binding.time.text.trim().toString()
+            val day = binding.day.text.trim().toString()
+            val week = binding.week.text.trim().toString()
+
+            setFragmentResult(
+                APPLY_REQUEST_KEY,
+                bundleOf(
+                    "type" to type,
+                    "course" to course,
+                    "time" to time,
+                    "day" to day,
+                    "week" to week
+                )
+            )
+
+            dismiss()
+        }
+
+        return binding.root
+    }
+
+    private fun setButtons(isFirstTime: Boolean) {
         val types = resources.getStringArray(R.array.type)
         val courses = resources.getStringArray(R.array.course)
         val times = resources.getStringArray(R.array.times)
@@ -36,61 +63,60 @@ class SearchFilterDialogFragment : BottomSheetDialogFragment() {
         val daysAdapter = ArrayAdapter(requireContext(), R.layout.item_exposed_dropdown_menu, days)
         val weeksAdapter = ArrayAdapter(requireContext(), R.layout.item_exposed_dropdown_menu, weeks)
 
-        with(binding) {
-            type.apply {
-                setText(types.first())
-                setAdapter(typesAdapter)
-                setDropDownBackgroundDrawable(ContextCompat.getDrawable(requireContext(),
-                    R.drawable.background_white_8dp))
-            }
-            course.apply {
-                setText(courses.first())
-                setAdapter(coursesAdapter)
-                setDropDownBackgroundDrawable(ContextCompat.getDrawable(requireContext(),
-                    R.drawable.background_white_8dp))
-            }
-            time.apply {
-                setText(times.first())
-                setAdapter(timesAdapter)
-                setDropDownBackgroundDrawable(ContextCompat.getDrawable(requireContext(),
-                    R.drawable.background_white_8dp))
-            }
-            day.apply {
-                setText(days.first())
-                setAdapter(daysAdapter)
-                setDropDownBackgroundDrawable(ContextCompat.getDrawable(requireContext(),
-                    R.drawable.background_white_8dp))
-            }
-            week.apply {
-                setText(weeks.first())
-                setAdapter(weeksAdapter)
-                setDropDownBackgroundDrawable(ContextCompat.getDrawable(requireContext(),
-                    R.drawable.background_white_8dp))
-            }
-
-            applyButton.setOnClickListener {
-                val type = binding.type.text.trim().toString()
-                val course = binding.course.text.trim().toString()
-                val time = binding.time.text.trim().toString()
-                val day = binding.day.text.trim().toString()
-                val week = binding.week.text.trim().toString()
-
-                setFragmentResult(
-                    APPLY_REQUEST_KEY,
-                    bundleOf(
-                        "type" to type,
-                        "course" to course,
-                        "time" to time,
-                        "day" to day,
-                        "week" to week
+        binding?.let {
+            with(it) {
+                type.apply {
+                    setDropDownBackgroundDrawable(
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.background_white_8dp
+                        )
                     )
-                )
-
-                dismiss()
+                    if (isFirstTime) setText(types.first())
+                    setAdapter(typesAdapter)
+                }
+                course.apply {
+                    setDropDownBackgroundDrawable(
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.background_white_8dp
+                        )
+                    )
+                    if (isFirstTime) setText(courses.first())
+                    setAdapter(coursesAdapter)
+                }
+                time.apply {
+                    setDropDownBackgroundDrawable(
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.background_white_8dp
+                        )
+                    )
+                    if (isFirstTime) setText(times.first())
+                    setAdapter(timesAdapter)
+                }
+                day.apply {
+                    setDropDownBackgroundDrawable(
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.background_white_8dp
+                        )
+                    )
+                    if (isFirstTime) setText(days.first())
+                    setAdapter(daysAdapter)
+                }
+                week.apply {
+                    setDropDownBackgroundDrawable(
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.background_white_8dp
+                        )
+                    )
+                    if (isFirstTime) setText(weeks.first())
+                    setAdapter(weeksAdapter)
+                }
             }
         }
-
-        return binding.root
     }
 
     companion object {
@@ -100,6 +126,11 @@ class SearchFilterDialogFragment : BottomSheetDialogFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setButtons(isFirstTime = false)
     }
 
 }
