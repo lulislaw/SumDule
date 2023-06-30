@@ -15,6 +15,11 @@
     <string name="search">Поиск</string>
     <string name="news">Новости</string>
     <string name="cabinet">ЛК</string>
+    <string name="type">Тип</string>
+    <string name="time">Время</string>
+    <string name="day">День</string>
+    <string name="week">Неделя</string>
+    <string name="apply">Применить</string>
 
     <string-array name="daysOfWeek">
         <item>Понедельник</item>

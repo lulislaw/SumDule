@@ -10,7 +10,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.firebase.database.DataSnapshot
@@ -28,7 +30,7 @@ private lateinit var adapterItemSubject: AdapterItemSubject
 lateinit var subjectList: ArrayList<SearchFragment.itemSearch>
 private var newTopMargin = 40
 private var searchAtTop = false
-lateinit var dialog: Dialog
+//lateinit var dialog: Dialog
 lateinit var viewDialog: View
 var params: ViewGroup.MarginLayoutParams? = null
 lateinit var listDir: Array<String>
@@ -48,7 +50,7 @@ class SearchFragment : Fragment(), OnClickListener {
     ): View? {
         binding = FragmentSearchBinding.inflate(layoutInflater)
         binding.searchTv.setOnClickListener(this)
-        dialog = Dialog(requireContext(), R.style.accent)
+//        dialog = Dialog(requireContext(), R.style.accent)
         viewDialog = layoutInflater.inflate(R.layout.popup_filter, null)
 
         getAllObjectsWithParentKeys { array ->
@@ -65,10 +67,12 @@ class SearchFragment : Fragment(), OnClickListener {
 
 
         }
-        dialog.setContentView(viewDialog)
+//        dialog.setContentView(viewDialog)
 
-
-
+        val searchFilterDialogFragment = SearchFilterDialogFragment()
+        binding.searchFilterButton.setOnClickListener {
+            searchFilterDialogFragment.show(parentFragmentManager, null)
+        }
 
         binding.searchEditText.isEnabled = false
 
@@ -78,7 +82,7 @@ class SearchFragment : Fragment(), OnClickListener {
         params = binding.searchTv.getLayoutParams() as ViewGroup.MarginLayoutParams
 
         binding.searchEditText.setOnClickListener(this)
-        binding.searchFilterButton.setOnClickListener(this)
+//        binding.searchFilterButton.setOnClickListener(this)
         binding.searchClearButton.setOnClickListener(this)
 
 
@@ -105,7 +109,16 @@ class SearchFragment : Fragment(), OnClickListener {
 
         })
 
+        // Вот твои данные, хавай
+        setFragmentResultListener(APPLY_REQUEST_KEY) { _, bundle ->
+            val course = bundle.getString("course")
+            val type = bundle.getString("type")
+            val time = bundle.getString("time")
+            val day = bundle.getString("day")
+            val week = bundle.getString("week")
 
+            Toast.makeText(requireContext(), "$course, $type, $time, $day, $week", Toast.LENGTH_SHORT).show()
+        }
 
 
         return binding.root
@@ -115,13 +128,15 @@ class SearchFragment : Fragment(), OnClickListener {
         @JvmStatic
         fun newInstance() =
             SearchFragment()
+
+        const val APPLY_REQUEST_KEY = "applyFiltersKey"
     }
 
     override fun onClick(p0: View?) {
         when (p0?.id) {
 
             R.id.searchFilterButton -> {
-                dialog.show()
+//                dialog.show()
             }
             R.id.searchTv -> {
 
